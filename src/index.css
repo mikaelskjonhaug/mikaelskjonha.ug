@@ -674,8 +674,8 @@ button:focus-visible {
   background: var(--surface);
   color: var(--text);
   font: inherit;
-  resize: vertical;
   transition: border-color 160ms ease;
+  resize: none;
 }
 
 .guestbook-form :is(input, textarea)::placeholder {

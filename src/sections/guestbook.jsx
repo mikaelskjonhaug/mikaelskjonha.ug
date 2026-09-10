@@ -73,11 +73,11 @@ export default function Guestbook() {
         <form className="guestbook-form" onSubmit={submit}>
           <label>
             <span>name <small>(optional)</small></span>
-            <input name="name" autoComplete="name" placeholder="Your name" />
+            <input name="name" autoComplete="name" maxLength="35" placeholder="Your name" />
           </label>
           <label>
             <span>entry</span>
-            <textarea name="entry" rows="3" required placeholder="Leave a note…" />
+            <textarea name="entry" rows="3" required maxLength="228" placeholder="Leave a short note" />
           </label>
           <button type="submit">Submit <span aria-hidden="true"></span></button>
         </form>
