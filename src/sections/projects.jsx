@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Baby } from "lucide-react";
 import EntryDropdown from "../components/entry-dropdown";
 import dungeonLogo from "../assets/dungeonart.jpg";
@@ -46,6 +47,8 @@ const projects = [
 ];
 
 export default function Projects() {
+  const [showAll, setShowAll] = useState(false);
+
   return (
     <div className="section-layout">
       <header className="section-header">
@@ -53,7 +56,7 @@ export default function Projects() {
         <h2>Projects</h2>
       </header>
       <div className="entries">
-        {projects.map((project) => (
+        {projects.slice(0, 2).map((project) => (
           <EntryDropdown
             key={project.title}
             name="project"
@@ -66,6 +69,35 @@ export default function Projects() {
             linkLabel="View project"
           />
         ))}
+        <div
+          className={`projects-more${showAll ? " is-open" : ""}`}
+          aria-hidden={!showAll}
+          inert={!showAll}
+        >
+          <div className="projects-more-inner">
+            {projects.slice(2).map((project) => (
+              <EntryDropdown
+                key={project.title}
+                name="project"
+                logo={project.logo}
+                title={project.title}
+                type={project.type}
+                tools={project.tools}
+                overview={project.overview}
+                link={project.link}
+                linkLabel="View project"
+              />
+            ))}
+          </div>
+        </div>
+        <button
+          type="button"
+          className="projects-toggle"
+          aria-expanded={showAll}
+          onClick={() => setShowAll(!showAll)}
+        >
+          {showAll ? "Show less ↑" : "Read more ↓"}
+        </button>
       </div>
     </div>
   );

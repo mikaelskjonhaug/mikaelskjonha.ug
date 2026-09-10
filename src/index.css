@@ -757,12 +757,47 @@ button:focus-visible {
   color: #ff8080;
 }
 
-.entries {
+.entry + .entry,
+.projects-more.is-open .entry:first-child {
+  margin-top: 1.1rem;
   border-top: 1px solid var(--rule);
 }
 
-.entry {
-  border-bottom: 1px solid var(--rule);
+.projects-toggle {
+  width: 100%;
+  padding: 0.8rem 0;
+  color: var(--cyan);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+.projects-toggle:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+
+.projects-more {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 280ms ease, opacity 180ms ease;
+}
+
+.projects-more.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.projects-more-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-more {
+    transition: none;
+  }
 }
 
 /* Each entry is a JSON object: brace, indented body, brace — one per line.
