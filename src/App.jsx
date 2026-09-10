@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import "./index.css";
-import CommandMenu from "./components/command-menu.jsx";
-import Experience from "./sections/experience.jsx";
+import CommandPalette from "./components/command-palette.jsx";
+import Work from "./sections/work.jsx";
 import Guestbook from "./sections/guestbook.jsx";
 import Hero from "./sections/hero.jsx";
 import Projects from "./sections/projects.jsx";
 import Skills from "./sections/skills.jsx";
 import { posts } from "./blog/index.js";
 
-const links = ["Blog", "Experience", "Projects", "Skills", "Guestbook"];
+const links = ["Blog", "Work", "Projects", "Skills", "Guestbook"];
 const socialLinks = [
   { label: "GitHub", href: "https://github.com/mikaelskjonhaug" },
   { label: "LinkedIn", href: "https://linkedin.com/in/mikaelskjonhaug" },
@@ -40,7 +40,7 @@ function Navbar() {
           </a>
         ))}
       </div>
-      <CommandMenu links={links} socialLinks={socialLinks} />
+      <CommandPalette links={links} socialLinks={socialLinks} />
     </nav>
   );
 }
@@ -92,8 +92,8 @@ export default function App() {
               </table>
             </div>
           </section>
-          <section id="experience" className="portfolio-section">
-            <Experience />
+          <section id="work" className="portfolio-section">
+            <Work />
           </section>
           <section id="projects" className="portfolio-section">
             <Projects />

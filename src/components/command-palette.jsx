@@ -29,7 +29,7 @@ export function getNavigationAction(event, linkCount) {
   return index < linkCount ? index : null;
 }
 
-export default function CommandMenu({ links, socialLinks }) {
+export default function CommandPalette({ links, socialLinks }) {
   const dialogRef = useRef(null);
   const guestbookDialogRef = useRef(null);
   const inputRef = useRef(null);

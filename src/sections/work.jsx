@@ -21,7 +21,7 @@ const experiences = [
   },
 ];
 
-export default function Experience() {
+export default function Work() {
   return (
     <div className="section-layout">
       <header className="section-header">

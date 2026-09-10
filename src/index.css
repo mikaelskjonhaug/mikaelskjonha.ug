@@ -1131,7 +1131,7 @@ button:focus-visible {
     width: 3.75rem;
   }
 
-  /* ponytail: whole bar is the command-menu button on mobile, so the section links go away */
+  /* ponytail: whole bar is the command-palette button on mobile, so the section links go away */
   .nav-links {
     display: none;
   }
