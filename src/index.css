@@ -393,7 +393,15 @@ button:focus-visible {
 .site-main {
   min-height: 0;
   min-width: 0;
+  margin-right: calc(-1 * max(2rem, (100vw - 70rem) / 2));
+  padding-right: max(2rem, (100vw - 70rem) / 2);
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.site-main::-webkit-scrollbar {
+  display: none;
 }
 
 .hero {
@@ -1115,6 +1123,8 @@ button:focus-visible {
 
   .site-main {
     height: 100%;
+    margin-right: 0;
+    padding-right: 0;
   }
 
   .site-nav {
@@ -1187,6 +1197,7 @@ button:focus-visible {
   }
 
   .command-trigger {
+    display: none;
     width: 2.75rem;
     height: auto;
     flex: none;
