@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Command } from "lucide-react";
 import Guestbook from "../sections/guestbook.jsx";
+import logo from "../assets/new_favicon.svg";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function getNavigationAction(event, linkCount) {
@@ -104,6 +105,7 @@ export default function CommandMenu({ links, socialLinks }) {
   return (
     <>
       <button type="button" className="command-trigger" onClick={open}>
+        <img className="command-trigger-logo" src={logo} alt="" />
         <span className="command-trigger-label">command menu</span>
         <span className="command-trigger-label-mobile">tap to open command menu</span>
         <span className="command-trigger-shortcut" aria-label={`${shortcutModifier} plus K`}>

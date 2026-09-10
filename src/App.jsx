@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./index.css";
 import CommandMenu from "./components/command-menu.jsx";
 import Experience from "./sections/experience.jsx";
@@ -16,9 +17,18 @@ const socialLinks = [
 
 function Navbar() {
   const navLinks = ["Hero", ...links];
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 24);
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
 
   return (
-    <nav className="site-nav" aria-label="Primary navigation">
+    <nav className={`site-nav${scrolled ? " is-scrolled" : ""}`} aria-label="Primary navigation">
       <span className="monogram" aria-label="ms.">
         <span>m</span>s<span>.</span>
       </span>
