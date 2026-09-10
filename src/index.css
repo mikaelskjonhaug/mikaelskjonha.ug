@@ -456,8 +456,8 @@ button:focus-visible {
 
 .hero-links a:hover {
   transform: translateY(-2px);
-  border-color: var(--purple);
-  color: var(--purple);
+  border-color: var(--cyan);
+  color: var(--cyan);
 }
 
 .hero-activity {
@@ -766,15 +766,16 @@ button:focus-visible {
 .projects-toggle {
   width: 100%;
   padding: 0.8rem 0;
-  color: var(--cyan);
+  color: var(--muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.75rem;
   text-align: left;
+  transition: color 160ms ease, transform 160ms ease;
 }
 
 .projects-toggle:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.25rem;
+  transform: translateY(-2px);
+  color: var(--cyan);
 }
 
 .projects-more {

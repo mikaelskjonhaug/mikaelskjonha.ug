@@ -96,7 +96,7 @@ export default function Projects() {
           aria-expanded={showAll}
           onClick={() => setShowAll(!showAll)}
         >
-          {showAll ? "Show less ↑" : "Read more ↓"}
+          {showAll ? "Show less ↑" : "Show more ↓"}
         </button>
       </div>
     </div>
