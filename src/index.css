@@ -15,6 +15,7 @@
   --purple: #bd93f9;
   --cyan: #8be9fd;
 }
+
 * {
   box-sizing: border-box;
 }
@@ -353,12 +354,12 @@ button:focus-visible {
   display: none;
 }
 
-.command-links :is(a, button) > span:last-child {
+.command-links :is(a, button)>span:last-child {
   color: var(--purple);
   opacity: 0;
 }
 
-.command-links :is(a, button):is(:focus, :hover) > span:last-child {
+.command-links :is(a, button):is(:focus, :hover)>span:last-child {
   opacity: 1;
 }
 
@@ -406,7 +407,7 @@ button:focus-visible {
 
 .hero-kicker,
 .hero-role,
-.section-header > span {
+.section-header>span {
   margin: 0;
   color: var(--muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -762,7 +763,7 @@ button:focus-visible {
   color: #ff8080;
 }
 
-.entry + .entry,
+.entry+.entry,
 .projects-more.is-open .entry:first-child {
   margin-top: 1.1rem;
   border-top: 1px solid var(--rule);
@@ -824,14 +825,14 @@ button:focus-visible {
 
 /* Braces sit on the same rhythm as the field rows: identical line-height
    and vertical padding, so every line in the object is evenly spaced. */
-.json-entry > summary > .json-brace {
+.json-entry>summary>.json-brace {
   padding: 0.2rem 0;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.8rem;
   line-height: 1.8;
 }
 
-.json-entry > summary > .json-brace:first-child {
+.json-entry>summary>.json-brace:first-child {
   padding-top: 1.1rem;
 }
 
@@ -881,7 +882,7 @@ button:focus-visible {
   transition: color 160ms ease, transform 160ms ease;
 }
 
-.entry:hover > summary > .json-brace {
+.entry:hover>summary>.json-brace {
   color: var(--cyan);
   transform: translateX(0.2rem);
 }
@@ -923,7 +924,7 @@ button:focus-visible {
 }
 
 /* Colon hugs its key; the space belongs after it, as in formatted JSON. */
-.json-row > .json-punct {
+.json-row>.json-punct {
   margin-right: 0.45rem;
 }
 
@@ -1039,7 +1040,10 @@ button:focus-visible {
   transform: translateY(-2px);
 }
 
-@media (hover: none), (pointer: coarse), (max-width: 767px) {
+@media (hover: none),
+(pointer: coarse),
+(max-width: 767px) {
+
   .nav-links button:hover,
   .command-trigger:hover,
   .site-footer a:hover {
@@ -1064,12 +1068,12 @@ button:focus-visible {
     color: var(--cyan);
   }
 
-  .entry:hover > summary > .json-brace {
+  .entry:hover>summary>.json-brace {
     color: var(--muted);
     transform: none;
   }
 
-  .entry[open] > summary > .json-brace {
+  .entry[open]>summary>.json-brace {
     color: var(--cyan);
   }
 
@@ -1096,7 +1100,8 @@ button:focus-visible {
   }
 }
 
-@media (max-width: 767px), (pointer: coarse) {
+@media (max-width: 767px),
+(pointer: coarse) {
   html {
     scroll-padding-top: 5.5rem;
   }
@@ -1114,7 +1119,7 @@ button:focus-visible {
 
   .site-nav {
     position: fixed;
-    inset: auto auto calc(0.75rem + env(safe-area-inset-bottom)) 50%;
+    inset: auto auto calc(2rem + env(safe-area-inset-bottom)) 50%;
     z-index: 20;
     display: flex;
     align-items: center;
