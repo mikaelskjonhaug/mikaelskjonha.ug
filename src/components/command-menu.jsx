@@ -106,8 +106,8 @@ export default function CommandMenu({ links, socialLinks }) {
     <>
       <button type="button" className="command-trigger" onClick={open}>
         <img className="command-trigger-logo" src={logo} alt="" />
-        <span className="command-trigger-label">command menu</span>
-        <span className="command-trigger-label-mobile">tap to open command menu</span>
+        <span className="command-trigger-label">open command palette</span>
+        <span className="command-trigger-label-mobile">open command palette</span>
         <span className="command-trigger-shortcut" aria-label={`${shortcutModifier} plus K`}>
           <kbd>{shortcutModifier === "⌘" ? <Command aria-hidden="true" /> : shortcutModifier}</kbd>
           <kbd>K</kbd>

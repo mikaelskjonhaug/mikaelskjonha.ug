@@ -1143,7 +1143,7 @@ button:focus-visible {
   .command-trigger {
     height: 100%;
     gap: 0.55rem;
-    justify-content: flex-start;
+    justify-content: center;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -1175,6 +1175,10 @@ button:focus-visible {
     max-width: 0;
     opacity: 0;
     transform: translateX(-0.3rem);
+  }
+
+  .site-nav.is-scrolled .command-trigger {
+    gap: 0;
   }
 
   .command-trigger-logo {
