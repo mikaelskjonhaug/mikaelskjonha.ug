@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 
-export default function Hero({ name }) {
+export default function HomePage({ name }) {
   const letters = name.split("");
   const finalName = `${name.slice(0, -2)}.ug`;
   const firstMIdx = letters.findIndex((letter) => letter.toLowerCase() === "m");

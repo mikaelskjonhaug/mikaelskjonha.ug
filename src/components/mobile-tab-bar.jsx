@@ -1,11 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookOpen, faDatabase, faFileCode, faFileLines } from "@fortawesome/free-solid-svg-icons";
+import { faBookOpen, faDatabase, faFileCode, faHouse } from "@fortawesome/free-solid-svg-icons";
 
 const tabs = [
+  { page: "hero", label: "Home", icon: faHouse },
   { page: "blog", label: "Blog", icon: faDatabase },
   { page: "work", label: "Work", icon: faFileCode },
-  { page: "projects", label: "Projects", icon: faFileCode },
-  { page: "skills", label: "Skills", icon: faFileLines },
   { page: "guestbook", label: "Guestbook", icon: faBookOpen },
 ];
 

@@ -4,9 +4,7 @@ import CommandPalette from "./components/command-palette.jsx";
 import MobileTabBar from "./components/mobile-tab-bar.jsx";
 import Work from "./sections/work.jsx";
 import Guestbook from "./sections/guestbook.jsx";
-import Hero from "./sections/hero.jsx";
-import Projects from "./sections/projects.jsx";
-import Skills from "./sections/skills.jsx";
+import HomePage from "./sections/home-page.jsx";
 import { posts } from "./blog/index.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
@@ -14,8 +12,8 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const socialIcons = { GitHub: faGithub, LinkedIn: faLinkedin, Email: faEnvelope };
 
-const links = ["Blog", "Work", "Projects", "Skills", "Guestbook"];
-const pageIds = ["hero", "blog", "work", "projects", "skills", "guestbook"];
+const links = ["Blog", "Work", "Guestbook"];
+const pageIds = ["hero", "blog", "work", "projects", "guestbook"];
 const socialLinks = [
   { label: "GitHub", href: "https://github.com/mikaelskjonhaug" },
   { label: "LinkedIn", href: "https://linkedin.com/in/mikaelskjonhaug" },
@@ -35,7 +33,7 @@ export function getNavigationPage(activePage, page) {
 }
 
 function Navbar({ activePage, onNavigate }) {
-  const navLinks = ["Hero", ...links];
+  const navLinks = ["Home Page", ...links];
 
   return (
     <nav className="site-nav" aria-label="Primary navigation">
@@ -44,7 +42,7 @@ function Navbar({ activePage, onNavigate }) {
       </span>
       <div className="nav-links">
         {navLinks.map((label, index) => {
-          const page = label === "Hero" ? "hero" : label.toLowerCase();
+          const page = label === "Home Page" ? "hero" : label.toLowerCase();
 
           return <button key={label} type="button" data-page={page} onClick={() => onNavigate(page)}>
             <span>./ {label}</span>
@@ -57,6 +55,28 @@ function Navbar({ activePage, onNavigate }) {
     </nav>
   );
 }
+
+export function Footer() {
+  return (
+    <footer className="site-footer">
+      <span>© {new Date().getFullYear()} Mikael Skjonhaug</span>
+      <div className="site-footer-social" aria-label="Social links">
+        {socialLinks.map(({ label, href }) => (
+          <a
+            key={label}
+            href={href}
+            target={href.startsWith("http") ? "_blank" : undefined}
+            rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+            aria-label={label === "Email" ? "Email Mikael" : label}
+          >
+            <FontAwesomeIcon icon={socialIcons[label]} />
+          </a>
+        ))}
+      </div>
+    </footer>
+  );
+}
+
 export default function App() {
   const [activePage, setActivePage] = useState(() => (
     typeof window === "undefined" ? "hero" : getPageFromHash(window.location.hash)
@@ -94,23 +114,7 @@ export default function App() {
         <Navbar activePage={activePage} onNavigate={navigate} />
         <main ref={mainRef} id="page-content" className="site-main">
           {activePage === "hero" && <>
-            <Hero name="mikaelskjonhaug" />
-            <footer className="site-footer">
-              <span>© {new Date().getFullYear()} Mikael Skjonhaug</span>
-              <div className="site-footer-social" aria-label="Social links">
-                {socialLinks.map(({ label, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target={href.startsWith("http") ? "_blank" : undefined}
-                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    aria-label={label === "Email" ? "Email Mikael" : label}
-                  >
-                    <FontAwesomeIcon icon={socialIcons[label]} />
-                  </a>
-                ))}
-              </div>
-            </footer>
+            <HomePage name="mikaelskjonhaug" />
           </>}
           {activePage === "blog" && <section id="blog" className="portfolio-section">
             <div className="section-layout">
@@ -157,14 +161,12 @@ export default function App() {
             <Work />
           </section>}
           {activePage === "projects" && <section id="projects" className="portfolio-section">
-            <Projects />
-          </section>}
-          {activePage === "skills" && <section id="skills" className="portfolio-section">
-            <Skills />
+            <Work />
           </section>}
           {activePage === "guestbook" && <section id="guestbook" className="portfolio-section">
             <Guestbook />
           </section>}
+          <Footer />
         </main>
       </div>
     </div>

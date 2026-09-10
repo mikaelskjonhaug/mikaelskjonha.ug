@@ -37,7 +37,7 @@ export default function CommandPalette({ links, socialLinks, onNavigate }) {
   const [query, setQuery] = useState("");
   const [hovered, setHovered] = useState(null);
   const navigationItems = [
-    { label: "Hero", page: "hero", shortcut: 0 },
+    { label: "Home Page", page: "hero", shortcut: 0 },
     ...links.map((label, index) => ({
       label,
       page: label.toLowerCase(),

@@ -397,11 +397,11 @@ button:focus-visible {
 
 .hero {
   display: flex;
-  min-height: min(42rem, 78vh);
+  min-height: 0;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   border-bottom: 1px solid var(--rule);
-  padding: 2rem 0 5rem;
+  padding: 6rem 0 0;
 }
 
 .hero-kicker,
@@ -467,7 +467,7 @@ button:focus-visible {
   grid-template-columns: auto minmax(0, 1fr);
   gap: 1rem;
   max-width: 42rem;
-  min-height: 4em;
+  min-height: calc(4 * 1.7em);
   margin-top: 2.5rem;
   color: var(--muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -1222,8 +1222,8 @@ button:focus-visible {
   }
 
   .hero {
-    min-height: 32rem;
-    padding: 2rem 0 4rem;
+    min-height: 0;
+    padding: 4rem 0 0;
   }
 
   .hero-name {

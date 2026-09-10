@@ -30,8 +30,8 @@ test("MobileTabBar renders labeled tabs with the active page selected", async ()
   const markup = renderToStaticMarkup(createElement(MobileTabBar, { activePage: "work", onNavigate() {} }));
 
   assert.match(markup, /role="tablist" aria-label="Pages"/);
-  assert.equal((markup.match(/role="tab"/g) ?? []).length, 5);
-  for (const label of ["Blog", "Work", "Projects", "Skills", "Guestbook"]) {
+  assert.equal((markup.match(/role="tab"/g) ?? []).length, 4);
+  for (const label of ["Blog", "Work", "Skills", "Guestbook"]) {
     assert.match(markup, new RegExp(`aria-label="${label}"`));
   }
   assert.match(markup, /aria-selected="true" aria-label="Work"/);
@@ -44,6 +44,16 @@ test("navigation selection skips the current page and returns a different valid 
   assert.equal(getNavigationPage("work", "work"), null);
   assert.equal(getNavigationPage("work", "projects"), "projects");
   assert.equal(getNavigationPage("hero", "not-a-page"), null);
+});
+
+test("Footer renders the shared copyright and social links", async () => {
+  const { Footer } = await loadModule("/src/App.jsx");
+  const markup = renderToStaticMarkup(createElement(Footer, { socialLinks: [
+    { label: "GitHub", href: "https://github.com/example" },
+  ] }));
+
+  assert.match(markup, /site-footer/);
+  assert.match(markup, /GitHub/);
 });
 
 // Browser history events need a DOM harness, which this project does not install.
