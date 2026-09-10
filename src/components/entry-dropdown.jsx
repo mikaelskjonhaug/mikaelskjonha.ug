@@ -41,7 +41,12 @@ export default function EntryDropdown({ logo, title, type, typeKey = "type", too
         <span className="json-brace json-brace-close" aria-hidden="true">{"}"}</span>
       </summary>
 
-      <div className="entry-details">
+      <div
+        className="entry-details"
+        onClick={(event) => {
+          if (!event.target.closest("a")) event.currentTarget.closest("details").open = false;
+        }}
+      >
         <Row slug={slug} field={typeKey} comma>
           <span className="json-string">"{type}"</span>
         </Row>

@@ -617,7 +617,7 @@ button:focus-visible {
 
 .skill-plaintext {
   margin: 0;
-  color: var(--muted);
+  color: var(--text);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.85rem;
   line-height: 2;
@@ -632,7 +632,7 @@ button:focus-visible {
 }
 
 .skill-punct {
-  color: var(--cyan);
+  color: var(--muted);
 }
 
 .skill-newline {
@@ -868,7 +868,7 @@ button:focus-visible {
 }
 
 .json-punct {
-  color: var(--cyan);
+  color: var(--muted);
 }
 
 .json-brace {
@@ -876,13 +876,13 @@ button:focus-visible {
   transition: color 160ms ease, transform 160ms ease;
 }
 
-.entry summary:hover > .json-brace {
+.entry:hover > summary > .json-brace {
   color: var(--cyan);
   transform: translateX(0.2rem);
 }
 
 .json-string {
-  color: var(--muted);
+  color: var(--text);
 }
 
 .json-logo {
@@ -963,6 +963,7 @@ button:focus-visible {
 .entry-details {
   padding: 0 1rem 0 0;
   color: var(--muted);
+  cursor: pointer;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.8rem;
 }
