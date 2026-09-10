@@ -36,7 +36,7 @@ export default function MobileTabBar({ activePage, onNavigate }) {
           onClick={() => onNavigate(page)}
           onKeyDown={(event) => handleKeyDown(event, index)}
         >
-          <FontAwesomeIcon icon={icon} aria-hidden="true" />
+          <FontAwesomeIcon className="mobile-tab-icon" icon={icon} aria-hidden="true" />
           <span>{label}</span>
         </button>
       ))}

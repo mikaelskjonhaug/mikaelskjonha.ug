@@ -1174,8 +1174,11 @@ button:focus-visible {
   }
 
   .mobile-tab-bar svg {
+    display: block;
+    flex: 0 0 auto;
     width: 1.15rem;
     height: 1.15rem;
+    margin: 0 auto;
   }
 
   .mobile-tab-bar button:focus-visible,
