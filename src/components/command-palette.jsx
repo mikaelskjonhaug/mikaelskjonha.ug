@@ -29,7 +29,7 @@ export function getNavigationAction(event, linkCount) {
   return index < linkCount ? index : null;
 }
 
-export default function CommandPalette({ links, socialLinks }) {
+export default function CommandPalette({ links, socialLinks, onNavigate }) {
   const dialogRef = useRef(null);
   const guestbookDialogRef = useRef(null);
   const inputRef = useRef(null);
@@ -37,10 +37,10 @@ export default function CommandPalette({ links, socialLinks }) {
   const [query, setQuery] = useState("");
   const [hovered, setHovered] = useState(null);
   const navigationItems = [
-    { label: "Hero", href: "#top", shortcut: 0 },
+    { label: "Hero", page: "hero", shortcut: 0 },
     ...links.map((label, index) => ({
       label,
-      href: `#${label.toLowerCase()}`,
+      page: label.toLowerCase(),
       shortcut: index + 1,
     })),
   ];
@@ -68,17 +68,17 @@ export default function CommandPalette({ links, socialLinks }) {
         event.preventDefault();
         dialogRef.current.close();
       } else if (action === "top") {
-        document.querySelector("#top")?.scrollIntoView();
+        onNavigate("hero");
         if (dialogRef.current.open) dialogRef.current.close();
       } else if (typeof action === "number") {
-        document.querySelector(`#${links[action].toLowerCase()}`)?.scrollIntoView();
+        onNavigate(links[action].toLowerCase());
         if (dialogRef.current.open) dialogRef.current.close();
       }
     };
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [links]);
+  }, [links, onNavigate]);
 
   const close = () => dialogRef.current.close();
   const open = () => {
@@ -104,10 +104,9 @@ export default function CommandPalette({ links, socialLinks }) {
 
   return (
     <>
-      <button type="button" className="command-trigger" onClick={open}>
+      <button type="button" className="command-trigger" aria-label="Open command palette" onClick={open}>
         <img className="command-trigger-logo" src={logo} alt="" />
-        <span className="command-trigger-label">open command palette</span>
-        <span className="command-trigger-label-mobile">open command palette</span>
+        <span className="command-trigger-label">command palette</span>
         <span className="command-trigger-shortcut" aria-label={`${shortcutModifier} plus K`}>
           <kbd>{shortcutModifier === "⌘" ? <Command aria-hidden="true" /> : shortcutModifier}</kbd>
           <kbd>K</kbd>
@@ -182,21 +181,25 @@ export default function CommandPalette({ links, socialLinks }) {
             {navigationResults.length > 0 && (
               <span className="command-group-label">navigate</span>
             )}
-            {navigationResults.map(({ label, href, shortcut }) => (
-              <a
+            {navigationResults.map(({ label, page, shortcut }) => (
+              <button
                 key={label}
-                href={href}
+                type="button"
                 className="command-navigation-item"
-                data-command-item={href}
-                onClick={close}
-                onMouseEnter={() => setHovered(href)}
+                data-page={page}
+                data-command-item={page}
+                onClick={() => {
+                  onNavigate(page);
+                  close();
+                }}
+                onMouseEnter={() => setHovered(page)}
                 onMouseLeave={() => setHovered(null)}
               >
                 <kbd>{shortcut}</kbd>
                 <span className="command-navigation-mark" aria-hidden="true">./</span>
                 <span>{label}</span>
                 <span aria-hidden="true">↵</span>
-              </a>
+              </button>
             ))}
             {!showGuestbookAction && navigationResults.length === 0 && socialResults.length === 0 && (
               <p className="command-empty" role="status">No commands found</p>

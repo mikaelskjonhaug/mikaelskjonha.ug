@@ -1,17 +1,7 @@
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-
-const socialIcons = {
-  GitHub: faGithub,
-  LinkedIn: faLinkedin,
-  Email: faEnvelope,
-};
-
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 
-export default function Hero({ name, socialLinks }) {
+export default function Hero({ name }) {
   const letters = name.split("");
   const finalName = `${name.slice(0, -2)}.ug`;
   const firstMIdx = letters.findIndex((letter) => letter.toLowerCase() === "m");
@@ -95,19 +85,6 @@ export default function Hero({ name, socialLinks }) {
           <span className="typing-caret" />
         </span>
       </h1>
-      <div className="hero-links" aria-label="Social links">
-        {socialLinks.map(({ label, href }) => (
-          <a
-            key={label}
-            href={href}
-            target={href.startsWith("http") ? "_blank" : undefined}
-            rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-            aria-label={label === "Email" ? "Email Mikael" : label}
-          >
-            <FontAwesomeIcon icon={socialIcons[label]} />
-          </a>
-        ))}
-      </div>
       <aside className="hero-activity" aria-live="polite" aria-busy={!activity}>
         <span className="hero-activity-label">activity / 7d</span>
         <div className={`hero-activity-content${activity ? " is-loaded" : ""}`}>

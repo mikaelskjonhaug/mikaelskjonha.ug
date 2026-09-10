@@ -1,57 +1,105 @@
 import { useEffect, useState } from "react";
 import "./index.css";
 import CommandPalette from "./components/command-palette.jsx";
+import MobileTabBar from "./components/mobile-tab-bar.jsx";
 import Work from "./sections/work.jsx";
 import Guestbook from "./sections/guestbook.jsx";
 import Hero from "./sections/hero.jsx";
 import Projects from "./sections/projects.jsx";
 import Skills from "./sections/skills.jsx";
 import { posts } from "./blog/index.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
+const socialIcons = { GitHub: faGithub, LinkedIn: faLinkedin, Email: faEnvelope };
 
 const links = ["Blog", "Work", "Projects", "Skills", "Guestbook"];
+const pageIds = ["hero", "blog", "work", "projects", "skills", "guestbook"];
 const socialLinks = [
   { label: "GitHub", href: "https://github.com/mikaelskjonhaug" },
   { label: "LinkedIn", href: "https://linkedin.com/in/mikaelskjonhaug" },
   { label: "Email", href: "mailto:mikaelsk@berkeley.edu" },
 ];
 
-function Navbar() {
+// eslint-disable-next-line react-refresh/only-export-components
+export function getPageFromHash(hash) {
+  const page = hash.slice(1);
+  return pageIds.includes(page) ? page : "hero";
+}
+
+function Navbar({ activePage, onNavigate }) {
   const navLinks = ["Hero", ...links];
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 24);
-
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
-  }, []);
 
   return (
-    <nav className={`site-nav${scrolled ? " is-scrolled" : ""}`} aria-label="Primary navigation">
+    <nav className="site-nav" aria-label="Primary navigation">
       <span className="monogram" aria-label="ms.">
         <span>m</span>s<span>.</span>
       </span>
       <div className="nav-links">
-        {navLinks.map((label, index) => (
-          <a key={label} href={label === "Hero" ? "#top" : `#${label.toLowerCase()}`}>
+        {navLinks.map((label, index) => {
+          const page = label === "Hero" ? "hero" : label.toLowerCase();
+
+          return <button key={label} type="button" data-page={page} onClick={() => onNavigate(page)}>
             <span>./ {label}</span>
             <kbd>{index}</kbd>
-          </a>
-        ))}
+          </button>;
+        })}
       </div>
-      <CommandPalette links={links} socialLinks={socialLinks} />
+      <MobileTabBar activePage={activePage} onNavigate={onNavigate} />
+      <CommandPalette links={links} socialLinks={socialLinks} onNavigate={onNavigate} />
     </nav>
   );
 }
 export default function App() {
+  const [activePage, setActivePage] = useState(() => (
+    typeof window === "undefined" ? "hero" : getPageFromHash(window.location.hash)
+  ));
+
+  useEffect(() => {
+    const syncPage = () => setActivePage(getPageFromHash(window.location.hash));
+
+    window.addEventListener("hashchange", syncPage);
+    window.addEventListener("popstate", syncPage);
+    return () => {
+      window.removeEventListener("hashchange", syncPage);
+      window.removeEventListener("popstate", syncPage);
+    };
+  }, []);
+
+  const navigate = (page) => {
+    const nextPage = getPageFromHash(`#${page}`);
+    const url = nextPage === "hero" ? `${window.location.pathname}${window.location.search}` : `#${nextPage}`;
+
+    window.history.pushState(null, "", url);
+    setActivePage(nextPage);
+  };
+
   return (
     <div id="top">
       <div className="site-shell">
-        <Navbar />
-        <main className="site-main">
-          <Hero name="mikaelskjonhaug" socialLinks={socialLinks} />
-          <section id="blog" className="portfolio-section">
+        <Navbar activePage={activePage} onNavigate={navigate} />
+        <main id="page-content" className="site-main">
+          {activePage === "hero" && <>
+            <Hero name="mikaelskjonhaug" />
+            <footer className="site-footer">
+              <span>© {new Date().getFullYear()} Mikael Skjonhaug</span>
+              <div className="site-footer-social" aria-label="Social links">
+                {socialLinks.map(({ label, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    aria-label={label === "Email" ? "Email Mikael" : label}
+                  >
+                    <FontAwesomeIcon icon={socialIcons[label]} />
+                  </a>
+                ))}
+              </div>
+            </footer>
+          </>}
+          {activePage === "blog" && <section id="blog" className="portfolio-section">
             <div className="section-layout">
               <header className="section-header">
                 <span>blog.db</span>
@@ -91,23 +139,19 @@ export default function App() {
                 </tbody>
               </table>
             </div>
-          </section>
-          <section id="work" className="portfolio-section">
+          </section>}
+          {activePage === "work" && <section id="work" className="portfolio-section">
             <Work />
-          </section>
-          <section id="projects" className="portfolio-section">
+          </section>}
+          {activePage === "projects" && <section id="projects" className="portfolio-section">
             <Projects />
-          </section>
-          <section id="skills" className="portfolio-section">
+          </section>}
+          {activePage === "skills" && <section id="skills" className="portfolio-section">
             <Skills />
-          </section>
-          <section id="guestbook" className="portfolio-section">
+          </section>}
+          {activePage === "guestbook" && <section id="guestbook" className="portfolio-section">
             <Guestbook />
-          </section>
-          <footer className="site-footer">
-            <span>© {new Date().getFullYear()} Mikael Skjonhaug</span>
-            <a href="#top">Back to top ↑</a>
-          </footer>
+          </section>}
         </main>
       </div>
     </div>

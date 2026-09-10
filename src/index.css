@@ -20,19 +20,27 @@
 }
 
 html {
+  height: 100%;
+  overflow: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
 }
 
 body {
+  height: 100%;
   min-width: 320px;
   margin: 0;
+  overflow: hidden;
   background:
     radial-gradient(circle at 72% 12%, rgb(189 147 249 / 7%), transparent 28rem),
     var(--bg);
   color: var(--text);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  height: 100%;
 }
 
 a {
@@ -64,7 +72,8 @@ button:focus-visible {
   grid-template-columns: 10rem minmax(0, 48rem);
   gap: clamp(3rem, 8vw, 7rem);
   width: min(100% - 4rem, 70rem);
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 0;
   margin: 0 auto;
   padding: 4.5rem 0 2.5rem;
 }
@@ -102,12 +111,19 @@ button:focus-visible {
   color: var(--muted);
 }
 
-.nav-links a {
+.nav-links button {
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
   transition: color 160ms ease, transform 160ms ease;
 }
 
@@ -122,7 +138,7 @@ button:focus-visible {
   text-align: center;
 }
 
-.nav-links a:hover {
+.nav-links button:hover {
   color: var(--cyan);
   transform: translateX(0.2rem);
 }
@@ -151,7 +167,7 @@ button:focus-visible {
   transform: translateX(0.2rem);
 }
 
-.command-trigger-label-mobile {
+.mobile-tab-bar {
   display: none;
 }
 
@@ -374,7 +390,9 @@ button:focus-visible {
 }
 
 .site-main {
+  min-height: 0;
   min-width: 0;
+  overflow-y: auto;
 }
 
 .hero {
@@ -443,29 +461,6 @@ button:focus-visible {
   margin: 1.75rem 0 0;
   color: var(--muted);
   font-size: clamp(1rem, 2vw, 1.15rem);
-}
-
-.hero-links {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2.25rem;
-  color: var(--muted);
-}
-
-.hero-links a {
-  display: grid;
-  width: 2.5rem;
-  height: 2.5rem;
-  place-items: center;
-  border: 1px solid var(--rule);
-  border-radius: 50%;
-  transition: border-color 160ms ease, color 160ms ease, transform 160ms ease;
-}
-
-.hero-links a:hover {
-  transform: translateY(-2px);
-  border-color: var(--cyan);
-  color: var(--cyan);
 }
 
 .hero-activity {
@@ -1034,23 +1029,21 @@ button:focus-visible {
   transition: color 160ms ease, transform 160ms ease;
 }
 
+.site-footer-social {
+  display: flex;
+  gap: 0;
+}
+
 .site-footer a:hover {
   color: var(--cyan);
   transform: translateY(-2px);
 }
 
-@media (hover: none), (max-width: 767px) {
-  .nav-links a:hover,
+@media (hover: none), (pointer: coarse), (max-width: 767px) {
+  .nav-links button:hover,
   .command-trigger:hover,
   .site-footer a:hover {
     color: var(--muted);
-    transform: none;
-  }
-
-  .hero-links a,
-  .hero-links a:hover {
-    border-color: var(--cyan);
-    color: var(--cyan);
     transform: none;
   }
 
@@ -1086,7 +1079,7 @@ button:focus-visible {
   }
 }
 
-@media (min-width: 768px) and (max-width: 960px) {
+@media (min-width: 768px) and (max-width: 960px) and (pointer: fine) {
   .section-layout {
     grid-template-columns: 1fr;
     gap: 1.75rem;
@@ -1103,7 +1096,7 @@ button:focus-visible {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767px), (pointer: coarse) {
   html {
     scroll-padding-top: 5.5rem;
   }
@@ -1111,48 +1104,87 @@ button:focus-visible {
   .site-shell {
     display: block;
     width: min(100% - 2.5rem, 48rem);
+    height: 100dvh;
     padding: 2rem 0 calc(6rem + env(safe-area-inset-bottom));
+  }
+
+  .site-main {
+    height: 100%;
   }
 
   .site-nav {
     position: fixed;
-    inset: auto auto calc(1rem + env(safe-area-inset-bottom)) 50%;
+    inset: auto auto calc(0.75rem + env(safe-area-inset-bottom)) 50%;
     z-index: 20;
-    display: block;
-    width: min(calc(100vw - 2.5rem), 18rem);
-    height: 3.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    width: min(calc(100vw - 1rem), 48rem);
+    height: 4.5rem;
     padding: 0.35rem;
     border: 1px solid rgb(248 248 242 / 12%);
-    border-radius: 999px;
+    border-radius: 1rem;
     background: rgb(48 51 65 / 82%);
     box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 28%);
     backdrop-filter: blur(18px) saturate(140%);
     transform: translateX(-50%);
-    transition: width 320ms cubic-bezier(0.33, 1, 0.68, 1);
   }
 
-  .site-nav.is-scrolled {
-    width: 3.75rem;
-  }
-
-  /* ponytail: whole bar is the command-palette button on mobile, so the section links go away */
-  .nav-links {
-    display: none;
-  }
-
+  .nav-links,
   .monogram {
     display: none;
   }
 
-  .command-trigger {
+  .mobile-tab-bar {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    min-width: 0;
     height: 100%;
-    gap: 0.55rem;
+    flex: 1;
+  }
+
+  .mobile-tab-bar button {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0.65rem;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font: 0.6rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    transition: color 160ms ease, background-color 160ms ease;
+  }
+
+  .mobile-tab-bar button[aria-selected="true"] {
+    background: rgb(139 233 253 / 8%);
+    color: var(--cyan);
+  }
+
+  .mobile-tab-bar svg {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .mobile-tab-bar button:focus-visible,
+  .command-trigger:focus-visible {
+    outline-offset: -2px;
+  }
+
+  .command-trigger {
+    width: 2.75rem;
+    height: 100%;
+    flex: none;
     justify-content: center;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    border-radius: inherit;
-    font-size: 0.7rem;
+    border-left: 1px solid var(--rule);
+    border-radius: 0;
   }
 
   .command-trigger:hover {
@@ -1164,31 +1196,10 @@ button:focus-visible {
     display: none;
   }
 
-  .command-trigger-label-mobile {
-    display: block;
-    max-width: 13rem;
-    opacity: 1;
-    transition:
-      max-width 260ms cubic-bezier(0.33, 1, 0.68, 1),
-      opacity 140ms ease,
-      transform 260ms cubic-bezier(0.33, 1, 0.68, 1);
-    white-space: nowrap;
-  }
-
-  .site-nav.is-scrolled .command-trigger-label-mobile {
-    max-width: 0;
-    opacity: 0;
-    transform: translateX(-0.3rem);
-  }
-
-  .site-nav.is-scrolled .command-trigger {
-    gap: 0;
-  }
-
   .command-trigger-logo {
     display: block;
-    width: 3.05rem;
-    height: 3.05rem;
+    width: 2.5rem;
+    height: 2.5rem;
     flex: none;
   }
 
