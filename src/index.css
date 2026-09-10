@@ -587,20 +587,23 @@ button:focus-visible {
   display: none;
 }
 
-.blog-post summary:hover .blog-cell-title,
-.blog-post[open] .blog-cell-title {
+.blog-post summary:hover .blog-cell-title {
   color: var(--cyan);
+}
+
+.blog-post summary:hover .blog-cell-title {
+  transform: translateX(0.2rem);
 }
 
 .blog-cell-title {
   color: var(--text);
-  transition: color 160ms ease;
+  transition: color 160ms ease, transform 160ms ease;
 }
 
 .blog-cell-title::before {
   display: inline-block;
   width: 1rem;
-  color: var(--purple);
+  color: inherit;
   content: "+";
 }
 
