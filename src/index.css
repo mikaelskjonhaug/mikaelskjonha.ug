@@ -1105,7 +1105,7 @@ button:focus-visible {
     display: block;
     width: min(100% - 2.5rem, 48rem);
     height: 100dvh;
-    padding: 2rem 0 calc(6rem + env(safe-area-inset-bottom));
+    padding: 2rem 0 0;
   }
 
   .site-main {
@@ -1118,10 +1118,12 @@ button:focus-visible {
     z-index: 20;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.25rem;
-    width: min(calc(100vw - 1rem), 48rem);
-    height: 4.5rem;
-    padding: 0.35rem;
+    width: max-content;
+    max-width: calc(100vw - 1rem);
+    height: auto;
+    padding: 0.2rem;
     border: 1px solid rgb(248 248 242 / 12%);
     border-radius: 1rem;
     background: rgb(48 51 65 / 82%);
@@ -1137,10 +1139,11 @@ button:focus-visible {
 
   .mobile-tab-bar {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, 3rem);
     min-width: 0;
-    height: 100%;
-    flex: 1;
+    height: auto;
+    flex: none;
+    width: max-content;
   }
 
   .mobile-tab-bar button {
@@ -1149,8 +1152,8 @@ button:focus-visible {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.35rem;
-    padding: 0;
+    gap: 0.15rem;
+    padding: 0.35rem 0.2rem;
     border: 0;
     border-radius: 0.65rem;
     background: transparent;
@@ -1177,13 +1180,13 @@ button:focus-visible {
 
   .command-trigger {
     width: 2.75rem;
-    height: 100%;
+    height: auto;
     flex: none;
     justify-content: center;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    border-left: 1px solid var(--rule);
+    border-left: 0;
     border-radius: 0;
   }
 
