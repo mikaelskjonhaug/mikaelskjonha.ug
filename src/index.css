@@ -1031,6 +1031,53 @@ button:focus-visible {
   transform: translateY(-2px);
 }
 
+@media (hover: none), (max-width: 767px) {
+  .nav-links a:hover,
+  .command-trigger:hover,
+  .site-footer a:hover {
+    color: var(--muted);
+    transform: none;
+  }
+
+  .hero-links a,
+  .hero-links a:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    transform: none;
+  }
+
+  .projects-toggle,
+  .projects-toggle:hover,
+  .guestbook-form button,
+  .guestbook-form button:hover {
+    color: var(--cyan);
+    transform: none;
+  }
+
+  .blog-post summary:hover .blog-cell-title {
+    color: var(--text);
+    transform: none;
+  }
+
+  .blog-post[open] summary .blog-cell-title {
+    color: var(--cyan);
+  }
+
+  .entry:hover > summary > .json-brace {
+    color: var(--muted);
+    transform: none;
+  }
+
+  .entry[open] > summary > .json-brace {
+    color: var(--cyan);
+  }
+
+  .hero-activity-repo:hover,
+  .entry-details a:hover {
+    text-decoration: none;
+  }
+}
+
 @media (min-width: 768px) and (max-width: 960px) {
   .section-layout {
     grid-template-columns: 1fr;
