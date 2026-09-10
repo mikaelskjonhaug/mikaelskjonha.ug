@@ -333,6 +333,10 @@ button:focus-visible {
   text-align: center;
 }
 
+.command-navigation-mark {
+  display: none;
+}
+
 .command-links :is(a, button) > span:last-child {
   color: var(--purple);
   opacity: 0;
@@ -1186,6 +1190,24 @@ button:focus-visible {
     width: 3.05rem;
     height: 3.05rem;
     flex: none;
+  }
+
+  .command-navigation-item kbd {
+    display: none;
+  }
+
+  .command-menu:not(.guestbook-dialog) .command-header {
+    display: none;
+  }
+
+  .command-links .command-navigation-item {
+    grid-template-columns: 1.75rem 1fr auto;
+  }
+
+  .command-navigation-mark {
+    display: block;
+    color: var(--purple);
+    text-align: center;
   }
 
   .hero {

@@ -186,12 +186,14 @@ export default function CommandPalette({ links, socialLinks }) {
               <a
                 key={label}
                 href={href}
+                className="command-navigation-item"
                 data-command-item={href}
                 onClick={close}
                 onMouseEnter={() => setHovered(href)}
                 onMouseLeave={() => setHovered(null)}
               >
                 <kbd>{shortcut}</kbd>
+                <span className="command-navigation-mark" aria-hidden="true">./</span>
                 <span>{label}</span>
                 <span aria-hidden="true">↵</span>
               </a>
