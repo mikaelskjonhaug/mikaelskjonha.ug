@@ -690,19 +690,19 @@ button:focus-visible {
 .guestbook-form button {
   justify-self: end;
   padding: 0.3rem 0.5rem;
-  border: 1px solid var(--muted);
+  border: 0;
   border-radius: 0.5rem;
   background: transparent;
   color: var(--muted);
   cursor: pointer;
   font: inherit;
   font-size: 0.7rem;
-  transition: background 160ms ease, color 160ms ease;
+  transition: color 160ms ease, transform 160ms ease;
 }
 
 .guestbook-form button:hover {
   color: var(--cyan);
-  border: 1px solid var(--cyan);
+  transform: translateY(-0.2rem);
 }
 
 .guestbook-feed {
