@@ -867,9 +867,18 @@ button:focus-visible {
   color: var(--purple);
 }
 
-.json-punct,
-.json-brace {
+.json-punct {
   color: var(--cyan);
+}
+
+.json-brace {
+  color: var(--muted);
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.entry summary:hover > .json-brace {
+  color: var(--cyan);
+  transform: translateX(0.2rem);
 }
 
 .json-string {

@@ -18,7 +18,7 @@ const projects = [
     logo: qwenLogo,
     title: "LLM Fine-tuning",
     type: "Model training",
-    tools: ["Python", "PyTorch", "Transformers"],
+    tools: ["Python", "PyTorch", "QWEN"],
     overview: "Full fine-tune of Qwen2.5-0.5B-Instruct on ML exam multiple-choice questions, improving accuracy 2x while preserving general reasoning.",
   },
   {
@@ -26,7 +26,7 @@ const projects = [
     title: "Beebo",
     type: "Web App",
     tools: ["Python", "FastAPI", "React", "PostgreSQL"],
-    overview: "WIP — a SaaS platform for parents to track and analyze their baby's growth, health, and development.",
+    overview: "Full stack web application.",
     link: "https://github.com/mikaelskjonhaug/Beebo",
   },
   {
