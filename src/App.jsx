@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./index.css";
 import CommandPalette from "./components/command-palette.jsx";
 import MobileTabBar from "./components/mobile-tab-bar.jsx";
@@ -28,6 +28,12 @@ export function getPageFromHash(hash) {
   return pageIds.includes(page) ? page : "hero";
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
+export function getNavigationPage(activePage, page) {
+  const nextPage = getPageFromHash(`#${page}`);
+  return nextPage === activePage ? null : nextPage;
+}
+
 function Navbar({ activePage, onNavigate }) {
   const navLinks = ["Hero", ...links];
 
@@ -55,6 +61,7 @@ export default function App() {
   const [activePage, setActivePage] = useState(() => (
     typeof window === "undefined" ? "hero" : getPageFromHash(window.location.hash)
   ));
+  const mainRef = useRef(null);
 
   useEffect(() => {
     const syncPage = () => setActivePage(getPageFromHash(window.location.hash));
@@ -67,8 +74,14 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    mainRef.current?.scrollTo(0, 0);
+  }, [activePage]);
+
   const navigate = (page) => {
-    const nextPage = getPageFromHash(`#${page}`);
+    const nextPage = getNavigationPage(activePage, page);
+    if (!nextPage) return;
+
     const url = nextPage === "hero" ? `${window.location.pathname}${window.location.search}` : `#${nextPage}`;
 
     window.history.pushState(null, "", url);
@@ -79,7 +92,7 @@ export default function App() {
     <div id="top">
       <div className="site-shell">
         <Navbar activePage={activePage} onNavigate={navigate} />
-        <main id="page-content" className="site-main">
+        <main ref={mainRef} id="page-content" className="site-main">
           {activePage === "hero" && <>
             <Hero name="mikaelskjonhaug" />
             <footer className="site-footer">

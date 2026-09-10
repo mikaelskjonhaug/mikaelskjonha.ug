@@ -33,7 +33,6 @@ export default function MobileTabBar({ activePage, onNavigate }) {
           role="tab"
           aria-selected={activePage === page}
           aria-label={label}
-          aria-controls="page-content"
           tabIndex={activePage === page || (activePage === "hero" && index === 0) ? 0 : -1}
           onClick={() => onNavigate(page)}
           onKeyDown={(event) => handleKeyDown(event, index)}
