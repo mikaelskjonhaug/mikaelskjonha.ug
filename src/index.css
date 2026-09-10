@@ -1025,6 +1025,7 @@ button:focus-visible {
 
 .site-footer {
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
   padding: 2rem 0 0;
   color: var(--muted);
@@ -1040,7 +1041,7 @@ button:focus-visible {
 .site-footer-social {
   display: flex;
   gap: 0;
-  font-size: 1.1rem;
+  font-size: 2.2rem;
 }
 
 .site-footer a:hover {
