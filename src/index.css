@@ -422,7 +422,6 @@ button:focus-visible {
 
 .hero-name {
   min-height: 1.08em;
-  margin: 0.7rem 0 1.2rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: clamp(2.65rem, 7vw, 5.25rem);
   font-weight: 650;
@@ -1032,6 +1031,7 @@ button:focus-visible {
 .site-footer-social {
   display: flex;
   gap: 0;
+  font-size: 1.1rem;
 }
 
 .site-footer a:hover {
